@@ -20,3 +20,18 @@ def index():
                            user=user,
                            posts=posts)
 
+@app.route('/')
+@app.route('/about')
+def about():
+    print 'to the backend world '
+    print 'like it or not, its not going to be esy'
+    
+    return render_template("about.html",
+                           title='About')
+
+@app.route('/')
+@app.route('/TMT')
+def TMT():
+    print 'Anouther boaring page '
+    return render_template("TMT.html",
+                          title='TMT')

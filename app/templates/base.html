@@ -2,9 +2,9 @@
 
 <head>
     {% if title %}
-    <title>{{ title }} - microblog</title>
+    <title>{{ title }} - Assignment</title>
     {% else %}
-    <title>microblog</title>
+    <title>Welcome Home</title>
     {% endif %}
     <link rel=stylesheet type=text href="{{ url_for('static',filename='/foundation/css/foundation.css')}}">
     <link rel=stylesheet type=text href="{{ url_for('static',filename='/foundation/css/app.css')}}">
@@ -12,8 +12,9 @@
 </head>
 
 <body class="flasking">
-    <div class="ours">Microblog: <a href="/index">Home</a></div>
-    <div>About: <a href="/about">About</a></div>
+    <div class="ours">By Qusai: <a href="/index">Home</a></div>
+    <div>Microblog: <a href="/about.html">About</a></div>
+    <div>TMT:<a href="TMT.html">TMT</a></div>
     <hr> {% with messages = get_flashed_messages() %} {% if messages %}
     <ul>
         {% for message in messages %}
