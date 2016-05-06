@@ -1,25 +1,26 @@
 <html>
-  <head>
+
+<head>
     {% if title %}
     <title>{{ title }} - microblog</title>
     {% else %}
     <title>microblog</title>
     {% endif %}
+    <link rel=stylesheet type=text href="{{ url_for('static',filename='/foundation/css/foundation.css')}}">
     <link rel=stylesheet type=text href="{{ url_for('static',filename='/foundation/css/app.css')}}">
-  </head>
-  <body>
-    <div>Microblog: <a href="/index">Home</a></div>
-    <div>About: <a href="/index">About</a></div>
-    <hr>
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        <ul>
+
+</head>
+
+<body class="flasking">
+    <div class="ours">Microblog: <a href="/index">Home</a></div>
+    <div>About: <a href="/about">About</a></div>
+    <hr> {% with messages = get_flashed_messages() %} {% if messages %}
+    <ul>
         {% for message in messages %}
-            <li>{{ message }} </li>
+        <li>{{ message }} </li>
         {% endfor %}
-        </ul>
-      {% endif %}
-    {% endwith %}
-    {% block content %}{% endblock %}
-  </body>
+    </ul>
+    {% endif %} {% endwith %} {% block content %}{% endblock %}
+</body>
+
 </html>
