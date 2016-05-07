@@ -4,7 +4,7 @@ from app import app
 @app.route('/')
 @app.route('/index')
 def index():
-    user = {'nickname': 'Miguel'}  # fake user
+    user = {'nickname': 'skywalker'}  # fake user
     posts = [  # fake array of posts
         { 
             'author': {'nickname': 'John'}, 
@@ -22,7 +22,7 @@ def index():
 @app.route('/')
 @app.route('/about')
 def about():
-    user = {'nickname': 'Miguel'}  # fake user
+    user = {'nickname': 'json'}  # fake user
     posts = [  # fake array of posts
         {
             'author': {'nickname': 'John'},
@@ -42,7 +42,7 @@ def about():
 @app.route('/')
 @app.route('/TMT')
 def TMT():
-    user = {'nickname': 'Miguel'}  # fake user
+    user = {'nickname': 'wolfy'}  # fake user
     posts = [  # fake array of posts
         {
             'author': {'nickname': 'John'},
