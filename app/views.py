@@ -67,10 +67,10 @@ def TMT():
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        flash('this is what you have entered in the form ,"%s", remember_me=%s' %
+        flash('Login requested for openID= ,"%s", remember_me=%s' %
               (form.openid.data, str(form.remember_me.data)))
         return redirect('/index')
     return render_template('login.html', 
                            title='Sign In',
                            form=form,
-                           providers=app.config['OPEN_PROVIDERS'])
+                           providers=app.config['OPENID_PROVIDERS'])
