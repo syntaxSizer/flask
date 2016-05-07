@@ -19,19 +19,42 @@ def index():
                            title='Home',
                            user=user,
                            posts=posts)
-
 @app.route('/')
 @app.route('/about')
 def about():
-    print 'to the backend world '
-    print 'like it or not, its not going to be esy'
-    
+    user = {'nickname': 'Miguel'}  # fake user
+    posts = [  # fake array of posts
+        {
+            'author': {'nickname': 'John'},
+            'body': 'Beautiful day in Portland!'
+        },
+        {
+            'author': {'nickname': 'Susan'},
+            'body': 'The Avengers movie was so cool!'
+        }
+    ]
     return render_template("about.html",
-                           title='About')
+                           title='Home',
+                           user=user,
+                           posts=posts)
+
 
 @app.route('/')
 @app.route('/TMT')
 def TMT():
-    print 'Anouther boaring page '
+    user = {'nickname': 'Miguel'}  # fake user
+    posts = [  # fake array of posts
+        {
+            'author': {'nickname': 'John'},
+            'body': 'Beautiful day in Portland!'
+        },
+        {
+            'author': {'nickname': 'Susan'},
+            'body': 'The Avengers movie was so cool!'
+        }
+    ]
     return render_template("TMT.html",
-                          title='TMT')
+                           title='Home',
+                           user=user,
+                           posts=posts)
+
