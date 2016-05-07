@@ -3,7 +3,17 @@
 
 {% block content %}
 <!-- js script that renders openID -->
+<script>
+founctin set_openid(open,pr)
+{
+u=openid.search('<username>')
+if (u != -1){
+// openid requiers user name
 
+user=prompt('Enter your ' + pr +' username:'_
+openid = openid.substr(0,u) + user
+}
+</script>
   <h1>Sign In</h1>
   <form action="" method="post" name="login">
       {{ form.hidden_tag() }}
@@ -13,6 +23,9 @@
           {% for error in form.openid.errors %}
           <span style="color:red;">[{{error}}]</span>
           {% endfor%}<br>
+          |{% for pr in providers %}
+          <a href="javascript:set_openid('{{pr.url}}','{{pr.username}}');"></a>|
+          {% endfor %}
       </p>
       <p>{{ form.remember_me }} Remember Me</p>
       <p><input type="submit" value="Sign In"></p>
