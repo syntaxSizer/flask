@@ -6,8 +6,8 @@
     {% else %}
     <title>Welcome Home</title>
     {% endif %}
-    <link rel=stylesheet type=text href="{{ url_for('static',filename='/foundation/css/foundation.css')}}">
-    <link rel=stylesheet type=text href="{{ url_for('static',filename='/foundation/css/app.css')}}">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='app.css') }}">
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='foundation.css') }}">
 
 </head>
 
@@ -22,6 +22,7 @@
         {% endfor %}
     </ul>
     {% endif %} {% endwith %} {% block content %}{% endblock %}
+ 
 </body>
 
 </html>
