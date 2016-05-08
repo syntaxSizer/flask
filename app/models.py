@@ -11,11 +11,11 @@ class User(db.Model):
         return '<User %r>' % (self.nickname)
 
 
-class post(db.Model1):
+class post(db.Model):
       id = db.Column(db.Integer,primary_key = True)
       body = db.Column(db.String(140))
       timestamp = db.Column(db.DateTime)
-      user_id = Ddb.Column(db.Integer, db.ForeignKey('user_id'))
+      user_id = db.Column(db.Integer, db.ForeignKey('user_id'))
       
  
       def __repr__(self):
