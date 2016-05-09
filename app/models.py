@@ -10,15 +10,15 @@ class User(db.Model):
     def is_authenticated(self):
         return True
    
-     @property
+    @property
     def is_active(self):
         return True
       
-      @property
+    @property
     def is_anonymous(self):
           return False
 
-      @property
+    @property
     def get_id(self):
         try:
             return unicode(self.id) # python 2
