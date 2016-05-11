@@ -1,9 +1,8 @@
-<!-- extends from base layout -->
+<!--base layout -->
 {% extends "base.html" %}
 
 {% block content %}
-<!-- js script that renders openID -->
-  <script type="text/javascript">
+    <script type="text/javascript">
     function set_openid(openid, pr)
     {
         u = openid.search('<username>');
@@ -15,8 +14,7 @@
         form = document.forms['login'];
         form.elements['openid'].value = openid;
     }
-</script>
- </script>
+    </script>
     <h1>Sign In</h1>
     <form action="" method="post" name="login">
         {{ form.hidden_tag() }}

@@ -1,3 +1,4 @@
+
 from flask import render_template, flash, redirect, session, url_for, request, g
 from flask.ext.login import login_user, logout_user, current_user, \
     login_required
@@ -5,30 +6,23 @@ from app import app, db, lm, oid
 from .forms import LoginForm
 from .models import User
 
+
+@lm.user_loader
+def load_user(id):
+    return User.query.get(int(id))
+
+
+@app.before_request
+def before_request():
+    g.user = current_user
+
+
 @app.route('/')
 @app.route('/index')
 @login_required
 def index():
     user = g.user
-    posts = [  # fake array of posts
-        { 
-            'author': {'nickname': 'John'}, 
-            'body': 'Beautiful day in Portland!' 
-        },
-        { 
-            'author': {'nickname': 'Susan'}, 
-            'body': 'The Avengers movie was so cool!' 
-        }
-    ]
-    return render_template("index.html",
-                           title='Home',
-                           user=user,
-                           posts=posts)
-@app.route('/')
-@app.route('/about')
-def about():
-    user = {'nickname': 'json'}  # fake user
-    posts = [  # fake array of posts
+    posts = [
         {
             'author': {'nickname': 'John'},
             'body': 'Beautiful day in Portland!'
@@ -38,34 +32,12 @@ def about():
             'body': 'The Avengers movie was so cool!'
         }
     ]
-    return render_template("about.html",
+    return render_template('index.html',
                            title='Home',
                            user=user,
                            posts=posts)
 
 
-@app.route('/')
-@app.route('/TMT')
-def TMT():
-    user = {'nickname': 'wolfy'}  # fake user
-    posts = [  # fake array of posts
-        {
-            'author': {'nickname': 'John'},
-            'body': 'Beautiful day in Portland!'
-        },
-        {
-            'author': {'nickname': 'Susan'},
-            'body': 'The Avengers movie was so cool!'
-        }
-    ]
-    return render_template("TMT.html",
-                           title='Home',
-                           user=user,
-                           posts=posts)
-
-#form view function
-# index view function suppressed for brevity
-#@app.route('/')
 @app.route('/login', methods=['GET', 'POST'])
 @oid.loginhandler
 def login():
@@ -75,15 +47,11 @@ def login():
     if form.validate_on_submit():
         session['remember_me'] = form.remember_me.data
         return oid.try_login(form.openid.data, ask_for=['nickname', 'email'])
-    return render_template('login.html', 
+    return render_template('login.html',
                            title='Sign In',
                            form=form,
                            providers=app.config['OPENID_PROVIDERS'])
 
-
-@lm.user_loader
-def load_user(id):
-    return User.query.get(int(id))
 
 @oid.after_login
 def after_login(resp):
@@ -106,13 +74,51 @@ def after_login(resp):
     return redirect(request.args.get('next') or url_for('index'))
 
 
-
-@app.before_request
-def before_request():
-    g.user = current_user
-
-
 @app.route('/logout')
 def logout():
     logout_user()
     return redirect(url_for('index'))
+
+
+
+@app.route('/TMT')
+def TMT():
+    print' Hi!'
+    return render_template('/TMT',title='TMT',user=user
+<!-- extends from base layout -->
+st=post)
+{% extends "base.html" %}
+
+{% block content %}
+<!-- js script that renders openID -->
+  <script type="text/javascript">
+    function set_openid(openid, pr)
+    {
+        u = openid.search('<username>');
+        if (u != -1) {
+            // openid requires username
+            user = prompt('Enter your ' + pr + ' username:');
+            openid = openid.substr(0, u) + user;
+        }
+        form = document.forms['login'];
+        form.elements['openid'].value = openid;
+    }
+</script>
+ </script>
+    <h1>Sign In</h1>
+    <form action="" method="post" name="login">
+        {{ form.hidden_tag() }}
+        <p>
+            Please enter your OpenID, or select one of the providers below:<br>
+            {{ form.openid(size=80) }}
+            {% for error in form.openid.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}<br>
+            |{% for pr in providers %}
+                <a href="javascript:set_openid('{{ pr.url }}', '{{ pr.name }}');">{{ pr.name }}</a> |
+            {% endfor %}
+        </p>
+        <p>{{ form.remember_me }} Remember Me</p>
+        <p><input type="submit" value="Sign In"></p>
+    </form>
+{% endblock %}
